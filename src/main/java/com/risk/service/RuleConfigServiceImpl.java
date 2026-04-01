@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.risk.dto.RuleConfigDTO;
 import com.risk.entity.WarningRuleConfigEntity;
 import com.risk.enums.RuleStatusEnum;
+import com.risk.exception.BusinessException;
 import com.risk.mapper.WarningRuleConfigMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,8 +82,12 @@ public class RuleConfigServiceImpl implements RuleConfigService {
                .last("LIMIT 1");
         WarningRuleConfigEntity latest = ruleConfigMapper.selectOne(wrapper);
 
+        if (latest == null) {
+            throw new BusinessException("规则不存在，ruleCode=" + dto.getRuleCode());
+        }
+
         // 2. 计算新版本号
-        int newVersion = (latest != null) ? latest.getVersion() + 1 : 1;
+        int newVersion = latest.getVersion() + 1;
 
         // 3. 插入新版本记录（旧版本保留不动）
         WarningRuleConfigEntity config = new WarningRuleConfigEntity();
@@ -118,6 +123,14 @@ public class RuleConfigServiceImpl implements RuleConfigService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void delete(String ruleCode) {
+        // 先查询该规则是否存在
+        LambdaQueryWrapper<WarningRuleConfigEntity> checkWrapper = new LambdaQueryWrapper<>();
+        checkWrapper.eq(WarningRuleConfigEntity::getRuleCode, ruleCode);
+        Long count = ruleConfigMapper.selectCount(checkWrapper);
+        if (count == null || count == 0) {
+            throw new BusinessException("规则不存在，ruleCode=" + ruleCode);
+        }
+
         LambdaUpdateWrapper<WarningRuleConfigEntity> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(WarningRuleConfigEntity::getRuleCode, ruleCode)
                .set(WarningRuleConfigEntity::getDeleted, 1);
@@ -133,7 +146,10 @@ public class RuleConfigServiceImpl implements RuleConfigService {
     public void activate(Long id) {
         WarningRuleConfigEntity current = ruleConfigMapper.selectById(id);
         if (current == null) {
-            throw new RuntimeException("规则不存在，id=" + id);
+            throw new BusinessException("规则不存在，id=" + id);
+        }
+        if (RuleStatusEnum.ACTIVE.getCode().equals(current.getStatus())) {
+            throw new BusinessException("规则已是生效状态，无需重复操作");
         }
 
         // 将同 ruleCode 下所有旧版本的 isCurrentVersion 置为 0，status 改为 ARCHIVED
@@ -158,7 +174,10 @@ public class RuleConfigServiceImpl implements RuleConfigService {
     public void deactivate(Long id) {
         WarningRuleConfigEntity current = ruleConfigMapper.selectById(id);
         if (current == null) {
-            throw new RuntimeException("规则不存在，id=" + id);
+            throw new BusinessException("规则不存在，id=" + id);
+        }
+        if (RuleStatusEnum.INACTIVE.getCode().equals(current.getStatus())) {
+            throw new BusinessException("规则已是停用状态，无需重复操作");
         }
 
         WarningRuleConfigEntity update = new WarningRuleConfigEntity();
@@ -226,7 +245,7 @@ public class RuleConfigServiceImpl implements RuleConfigService {
             try {
                 return objectMapper.writeValueAsString(dto.getRuleConditionsObj());
             } catch (JsonProcessingException e) {
-                throw new RuntimeException("规则条件序列化失败", e);
+                throw new BusinessException("规则条件序列化失败");
             }
         }
         return null;

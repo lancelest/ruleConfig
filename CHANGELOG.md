@@ -4,6 +4,56 @@
 
 ---
 
+## [v9] 2026-04-01 23:13 — 新增模拟数据 SQL
+
+**需求**：根据当前代码逻辑生成模拟数据，展示数据库中的实际数据效果，并体现 AND 条件关系。
+
+**变更**：
+- 新建 `mock_data.sql`，包含：
+  - **12 条指标元数据**（indicator_metadata）：覆盖业绩表现、风险指标、权益资产配置、交易行为四大类
+  - **7 条规则（11 条记录含多版本）**（warning_rule_config），覆盖以下场景：
+    - 单指标 SINGLE：规则1、规则4、规则6
+    - **多指标 AND（2/3/4 个条件）**：规则2（3指标AND）、规则5（4指标AND）、规则7（2指标AND）
+    - 版本演进：规则1（v1归档→v2生效）、规则4（v1→v2→v3删除）、规则6（v1生效→v2停用草稿）
+    - 伪删除：规则4 v3（deleted=1），可通过 versions/all 回溯
+    - 状态流转：DRAFT → ACTIVE → ARCHIVED / INACTIVE
+  - 4 条验证查询 SQL
+
+**涉及文件**：
+- `mock_data.sql`（新增）
+
+---
+
+## [v8] 2026-04-01 23:06 — 新增全局异常处理与业务校验
+
+**需求**：当前代码异常处理较少，需要加一些方便排错的异常处理。
+
+**分析**：
+- Service 层抛的是裸 `RuntimeException`，Controller 没有统一拦截，出异常就是 Spring 默认 500 白页
+- 关键操作（更新、删除、生效、停用）缺少前置校验（如规则不存在、状态不允许操作等）
+
+**变更**：
+- 新建 `exception/BusinessException.java`：自定义业务异常，携带 code 和 message
+- 新建 `exception/GlobalExceptionHandler.java`：全局异常处理器，拦截 5 类异常：
+  - `BusinessException` → 业务错误，返回 code + message
+  - `MethodArgumentNotValidException` → `@Validated` 校验失败，返回具体字段错误
+  - `BindException` → 表单绑定错误
+  - `MissingServletRequestParameterException` → 缺少必传参数
+  - `Exception` → 兜底，日志记录完整堆栈，前端只看到通用提示
+- ServiceImpl 关键位置补充业务校验：
+  - `update`：规则不存在时抛异常（原来直接忽略）
+  - `delete`：规则不存在时抛异常（原来静默成功）
+  - `activate`：规则不存在 / 已是生效状态时抛异常
+  - `deactivate`：规则不存在 / 已是停用状态时抛异常
+- 所有 `RuntimeException` 统一替换为 `BusinessException`
+
+**涉及文件**：
+- `exception/BusinessException.java`（新增）
+- `exception/GlobalExceptionHandler.java`（新增）
+- `service/RuleConfigServiceImpl.java`
+
+---
+
 ## [v7] 2026-04-01 22:55 — 合并删除接口为单一入口
 
 **需求**：`deleteById` 和 `deleteByRuleCode` 两个删除接口暴露给前端会造成困惑，合并为一个。

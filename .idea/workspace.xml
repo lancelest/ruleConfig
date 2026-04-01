@@ -4,34 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ee8aa03-a304-486f-997d-7acdf5d2814c" name="更改" comment="git">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/maven/archetype.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/main/java/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/test/java/AppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/RiskRuleApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/RiskRuleApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/application/service/RuleConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/service/RuleConfigService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/application/service/RuleConfigServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/service/RuleConfigServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/domain/entity/IndicatorMetadata.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/domain/entity/WarningRuleConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/domain/enums/OperatorEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/enums/OperatorEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/domain/enums/RuleStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/enums/RuleStatusEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/domain/enums/TriggerLevelEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/enums/TriggerLevelEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/domain/vo/RuleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/vo/RuleCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/domain/vo/RuleConditions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/vo/RuleConditions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/infrastructure/handler/AutoFillHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/handler/AutoFillHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/infrastructure/mapper/IndicatorMetadataMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/mapper/IndicatorMetadataMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/infrastructure/mapper/WarningRuleConfigMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/mapper/WarningRuleConfigMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/interface/controller/RuleConfigController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/controller/RuleConfigController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/interface/dto/ResultVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/dto/ResultVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/interface/dto/RuleConfigCreateDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tonghua/risk/interface/dto/RuleConfigUpdateDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
+    <list default="true" id="7ee8aa03-a304-486f-997d-7acdf5d2814c" name="更改" comment="feat:版本迭代v2">
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/service/RuleConfigServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/service/RuleConfigServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,8 +132,17 @@
       <workItem from="1774965573728" duration="10696000" />
       <workItem from="1775052102361" duration="118000" />
       <workItem from="1775052238421" duration="69000" />
-      <workItem from="1775052332890" duration="3132000" />
+      <workItem from="1775052332890" duration="4581000" />
     </task>
+    <task id="LOCAL-00001" summary="feat:版本迭代v2">
+      <option name="closed" value="true" />
+      <created>1775055525617</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1775055525617</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,5 +155,9 @@
     <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
     <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
     <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat:版本迭代v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:版本迭代v2" />
   </component>
 </project>
