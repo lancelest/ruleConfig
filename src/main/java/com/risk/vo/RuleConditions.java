@@ -1,4 +1,4 @@
-package com.risk.vo;
+﻿package com.risk.vo;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * 规则条件集合 - 整个规则的条件定义
  *
  * 示例：
- * 单指标：{"logic":"SINGLE","conditions":[{"indicatorCode":"excess_return_1y","operator":"GT","threshold":0}]}
+ * 单指标：{"logic":"SINGLE","conditions":[{"metricCode":"excess_return_1y","operator":"GT","threshold":0}]}
  * 多指标AND：{"logic":"AND","conditions":[...]}
  */
 @Data

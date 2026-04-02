@@ -1,4 +1,4 @@
-package com.risk.entity;
+﻿package com.risk.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
  * 指标元数据实体
  */
 @Data
-@TableName("indicator_metadata")
-public class IndicatorMetadataEntity implements Serializable {
+@TableName("metric_metadata")
+public class MetricMetadataEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键ID */
@@ -24,10 +24,10 @@ public class IndicatorMetadataEntity implements Serializable {
     private Long id;
 
     /** 指标编码，如：excess_return_1y */
-    private String indicatorCode;
+    private String metricCode;
 
     /** 指标名称，如：超额收益_近一年 */
-    private String indicatorName;
+    private String metricName;
 
     /** 指标分类编码，如：performance */
     private String categoryCode;
@@ -37,6 +37,15 @@ public class IndicatorMetadataEntity implements Serializable {
 
     /** 指标计算逻辑说明 */
     private String calcFormula;
+
+    /** 指标类型编码（业绩表现/资产配置/风险指标） */
+    private String metricTypeCode;
+
+    /** 指标类型名称 */
+    private String metricTypeName;
+
+    /** 阈值类型 NEGATIVE-负向 ABSOLUTE-绝对值偏离 */
+    private String thresholdType;
 
     /** 创建时间 */
     @TableField(fill = FieldFill.INSERT)

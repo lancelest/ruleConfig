@@ -1,4 +1,4 @@
-package com.risk.entity;
+﻿package com.risk.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -22,8 +22,8 @@ import java.time.LocalDateTime;
  * 3. deleted 字段实现伪删除
  */
 @Data
-@TableName("warning_rule_config")
-public class WarningRuleConfigEntity implements Serializable {
+@TableName("rule_config")
+public class RuleConfigEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键ID */
@@ -37,16 +37,16 @@ public class WarningRuleConfigEntity implements Serializable {
     private String ruleName;
 
     /** 组合类型编码（如：active_equity） */
-    private String portfolioTypeCode;
+    private String portTypeCode;
 
     /** 组合类型名称（如：主动权益） */
-    private String portfolioTypeName;
+    private String portTypeName;
 
     /** 指标编码 */
-    private String indicatorCode;
+    private String metricCode;
 
     /** 指标名称 */
-    private String indicatorName;
+    private String metricName;
 
     /** 细分类别（如：基准股票比例10%~20%） */
     private String subCategory;
@@ -58,16 +58,16 @@ public class WarningRuleConfigEntity implements Serializable {
     private String ruleConditions;
 
     /** 层级1阈值（正常边界） */
-    private BigDecimal thresholdL1;
+    private BigDecimal level1;
 
     /** 层级2阈值（警告） */
-    private BigDecimal thresholdL2;
+    private BigDecimal level2;
 
     /** 层级3阈值（错误） */
-    private BigDecimal thresholdL3;
+    private BigDecimal level3;
 
     /** 层级4阈值（严重） */
-    private BigDecimal thresholdL4;
+    private BigDecimal level4;
 
     /** 版本号，每次保存+1 */
     private Integer version;

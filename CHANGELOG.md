@@ -4,14 +4,115 @@
 
 ---
 
+## [v12] 2026-04-02 23:58 — 规则引擎核心代码实现
+
+**需求**：实现规则引擎核心功能，支持指标评估、批量评估、细分类别、豁免组合。
+
+**变更**：
+- 新增实体类：
+  - `RuleSubCategoryEntity`：规则细分类别配置
+  - `RuleExemptionEntity`：豁免组合配置
+- 新增 Mapper：
+  - `RuleSubCategoryMapper`
+  - `RuleExemptionMapper`
+- 扩展 `MetricMetadataEntity`：新增 `metricTypeCode`、`metricTypeName`、`thresholdType` 字段
+- 新增 DTO/VO：
+  - `RuleEvalRequest`：单次评估请求
+  - `BatchEvalRequest`：批量评估请求
+  - `RuleEvalResult`：评估结果
+  - `BatchEvalResult`：批量评估结果
+- 新增规则引擎核心服务：
+  - `RuleEngineService`：规则引擎服务接口
+  - `RuleEngineServiceImpl`：规则引擎服务实现
+    - `evaluate()`：单次评估核心逻辑
+    - `batchEvaluate()`：批量评估
+    - `findMatchingRule()`：查找匹配规则
+    - `isExempted()`：检查豁免
+    - `getThresholds()`：获取阈值（优先细分类别）
+    - `determineLevel()`：判定触发等级
+- 新增 Controller：
+  - `RuleEngineController`：规则引擎接口
+    - `POST /api/rule-engine/evaluate`：单次评估
+    - `POST /api/rule-engine/batch`：批量评估
+
+**涉及文件**：
+- `entity/RuleSubCategoryEntity.java`（新增）
+- `entity/RuleExemptionEntity.java`（新增）
+- `entity/MetricMetadataEntity.java`（修改）
+- `mapper/RuleSubCategoryMapper.java`（新增）
+- `mapper/RuleExemptionMapper.java`（新增）
+- `dto/RuleEvalRequest.java`（新增）
+- `dto/BatchEvalRequest.java`（新增）
+- `vo/RuleEvalResult.java`（新增）
+- `vo/BatchEvalResult.java`（新增）
+- `service/RuleEngineService.java`（新增）
+- `service/impl/RuleEngineServiceImpl.java`（新增）
+- `controller/RuleEngineController.java`（新增）
+
+---
+
+## [v11] 2026-04-02 23:55 — 规则引擎设计确定
+
+**需求**：确定规则引擎核心设计，支持细分类别、豁免组合、双向查询。
+
+**分析**：
+- 规则编码 = 产品维度 + 指标维度，不同产品类型对同一指标有不同阈值
+- 细分类别需要动态扩展（如固收+股票仓位按基准比例分档）
+- 豁免组合按组合类型级别配置，带开关控制
+- 同一套规则支持组合类型视角和指标视角双向查询
+
+**变更**：
+- 新增数据表设计：
+  - `rule_sub_category`：规则细分类别配置表，支持动态扩展
+  - `rule_exemption`：豁免组合配置表，按 ruleCode + level + portTypeCode 唯一约束
+- `metric_metadata` 表扩展：
+  - `metric_type_code` / `metric_type_name`：指标类型（业绩表现/资产配置/风险指标）
+  - `threshold_type`：阈值类型（NEGATIVE-负向 / ABSOLUTE-绝对值偏离）
+- 字段命名统一规范：跨表关联字段使用同一名称
+- 规则引擎核心逻辑设计：
+  - 查找匹配规则 → 检查豁免 → 获取阈值 → 判定等级 → 写入触发事件
+
+**涉及文件**：
+- `需求文档.md`（新增规则引擎设计章节）
+- `数据库设计.md`（新增3张表 + 字段命名统一规范）
+
+---
+
+## [v10] 2026-04-02 22:18 — 大规模命名规范化重命名
+
+**需求**：统一简化类名、字段名、表名，方便阅读代码。
+
+**变更映射**：
+
+| 旧名称 | 新名称 | 范围 |
+|--------|--------|------|
+| `WarningRuleConfigEntity` | `RuleConfigEntity` | 类名 |
+| `WarningRuleConfigMapper` | `RuleConfigMapper` | 类名 |
+| `IndicatorMetadataEntity` | `MetricMetadataEntity` | 类名 |
+| `IndicatorMetadataMapper` | `MetricMetadataMapper` | 类名 |
+| `RuleConfigDTO` | `RuleConfigParams` | 类名 |
+| `portfolioTypeCode` | `portTypeCode` | 字段名 |
+| `portfolioTypeName` | `portTypeName` | 字段名 |
+| `indicatorCode` | `metricCode` | 字段名 |
+| `indicatorName` | `metricName` | 字段名 |
+| `thresholdL1~L4` | `level1~level4` | 字段名 |
+| `warning_rule_config` | `rule_config` | 表名 |
+| `indicator_metadata` | `metric_metadata` | 表名 |
+| `listByPortfolioType` | `listByPortType` | 方法名 |
+| `listByIndicator` | `listByMetric` | 方法名 |
+
+**涉及文件**：全部 Java 文件 + CHANGELOG.md + 数据库设计.md + mock_data.sql
+
+---
+
 ## [v9] 2026-04-01 23:13 — 新增模拟数据 SQL
 
 **需求**：根据当前代码逻辑生成模拟数据，展示数据库中的实际数据效果，并体现 AND 条件关系。
 
 **变更**：
 - 新建 `mock_data.sql`，包含：
-  - **12 条指标元数据**（indicator_metadata）：覆盖业绩表现、风险指标、权益资产配置、交易行为四大类
-  - **7 条规则（11 条记录含多版本）**（warning_rule_config），覆盖以下场景：
+  - **12 条指标元数据**（metric_metadata）：覆盖业绩表现、风险指标、权益资产配置、交易行为四大类
+  - **7 条规则（11 条记录含多版本）**（rule_config），覆盖以下场景：
     - 单指标 SINGLE：规则1、规则4、规则6
     - **多指标 AND（2/3/4 个条件）**：规则2（3指标AND）、规则5（4指标AND）、规则7（2指标AND）
     - 版本演进：规则1（v1归档→v2生效）、规则4（v1→v2→v3删除）、规则6（v1生效→v2停用草稿）
@@ -84,7 +185,7 @@
 - Controller 新增 `GET /api/rule-config/versions/{ruleCode}/all` 接口
 
 **涉及文件**：
-- `mapper/WarningRuleConfigMapper.java`
+- `mapper/RuleConfigMapper.java`
 - `service/RuleConfigService.java`
 - `service/RuleConfigServiceImpl.java`
 - `controller/RuleConfigController.java`
@@ -96,8 +197,8 @@
 **需求**：实体类名统一加 `Entity` 后缀。
 
 **变更**：
-- `WarningRuleConfig` → `WarningRuleConfigEntity`
-- `IndicatorMetadata` → `IndicatorMetadataEntity`
+- `RuleConfig` → `RuleConfigEntity`
+- `MetricMetadata` → `MetricMetadataEntity`
 - 所有引用类同步更新
 
 **涉及文件**：所有 Java 文件（引用了实体类的 Controller、Service、ServiceImpl、Mapper 等）
@@ -110,10 +211,10 @@
 
 **变更**：
 - 删除 `RuleConfigCreateDTO` 和 `RuleConfigUpdateDTO`
-- 合并为单一 `RuleConfigDTO`，同时用于新增和更新接口
+- 合并为单一 `RuleConfigParams`，同时用于新增和更新接口
 
 **涉及文件**：
-- `dto/RuleConfigDTO.java`
+- `dto/RuleConfigParams.java`
 - `controller/RuleConfigController.java`
 - `service/RuleConfigService.java`
 - `service/RuleConfigServiceImpl.java`

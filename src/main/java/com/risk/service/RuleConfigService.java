@@ -1,7 +1,7 @@
-package com.risk.service;
+﻿package com.risk.service;
 
-import com.risk.dto.RuleConfigDTO;
-import com.risk.entity.WarningRuleConfigEntity;
+import com.risk.dto.RuleConfigParams;
+import com.risk.entity.RuleConfigEntity;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface RuleConfigService {
      * @param dto 请求参数
      * @return 新增的规则配置
      */
-    WarningRuleConfigEntity create(RuleConfigDTO dto);
+    RuleConfigEntity create(RuleConfigParams dto);
 
     /**
      * 更新规则（生成新版本）
@@ -35,7 +35,7 @@ public interface RuleConfigService {
      * @param dto 请求参数
      * @return 新版本的规则配置
      */
-    WarningRuleConfigEntity update(RuleConfigDTO dto);
+    RuleConfigEntity update(RuleConfigParams dto);
 
     /**
      * 删除规则（伪删除）
@@ -69,23 +69,23 @@ public interface RuleConfigService {
      * @param id 规则配置ID
      * @return 规则配置详情
      */
-    WarningRuleConfigEntity getById(Long id);
+    RuleConfigEntity getById(Long id);
 
     /**
      * 按组合类型查询规则列表（组合维度视图）
      *
-     * @param portfolioTypeCode 组合类型编码
+     * @param portTypeCode 组合类型编码
      * @return 该类型下所有规则（仅返回当前生效版本）
      */
-    List<WarningRuleConfigEntity> listByPortfolioType(String portfolioTypeCode);
+    List<RuleConfigEntity> listByPortType(String portTypeCode);
 
     /**
      * 按指标编码查询规则列表（指标维度视图）
      *
-     * @param indicatorCode 指标编码
+     * @param metricCode 指标编码
      * @return 该指标在所有组合类型下的规则（仅返回当前生效版本）
      */
-    List<WarningRuleConfigEntity> listByIndicator(String indicatorCode);
+    List<RuleConfigEntity> listByMetric(String metricCode);
 
     /**
      * 查询规则的所有历史版本（不含已删除）
@@ -93,7 +93,7 @@ public interface RuleConfigService {
      * @param ruleCode 规则编码
      * @return 按版本号倒序排列的所有版本
      */
-    List<WarningRuleConfigEntity> listVersions(String ruleCode);
+    List<RuleConfigEntity> listVersions(String ruleCode);
 
     /**
      * 查询规则的所有历史版本（含已删除）
@@ -103,5 +103,5 @@ public interface RuleConfigService {
      * @param ruleCode 规则编码
      * @return 按版本号倒序排列的所有版本（包含已删除记录）
      */
-    List<WarningRuleConfigEntity> listVersionsIncludeDeleted(String ruleCode);
+    List<RuleConfigEntity> listVersionsIncludeDeleted(String ruleCode);
 }

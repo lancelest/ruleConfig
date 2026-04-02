@@ -1,4 +1,4 @@
-package com.risk.dto;
+﻿package com.risk.dto;
 
 import com.risk.vo.RuleConditions;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * 规则配置请求参数（新增/更新通用）
  */
 @Data
-public class RuleConfigDTO {
+public class RuleConfigParams {
 
     /** 规则编码，业务唯一标识 */
     @NotBlank(message = "规则编码不能为空")
@@ -21,16 +21,16 @@ public class RuleConfigDTO {
     private String ruleName;
 
     /** 组合类型编码（如：active_equity） */
-    private String portfolioTypeCode;
+    private String portTypeCode;
 
     /** 组合类型名称（如：主动权益） */
-    private String portfolioTypeName;
+    private String portTypeName;
 
     /** 指标编码 */
-    private String indicatorCode;
+    private String metricCode;
 
     /** 指标名称 */
-    private String indicatorName;
+    private String metricName;
 
     /** 细分类别 */
     private String subCategory;
@@ -48,16 +48,16 @@ public class RuleConfigDTO {
     private RuleConditions ruleConditionsObj;
 
     /** 层级1阈值 */
-    private BigDecimal thresholdL1;
+    private BigDecimal level1;
 
     /** 层级2阈值 */
-    private BigDecimal thresholdL2;
+    private BigDecimal level2;
 
     /** 层级3阈值 */
-    private BigDecimal thresholdL3;
+    private BigDecimal level3;
 
     /** 层级4阈值 */
-    private BigDecimal thresholdL4;
+    private BigDecimal level4;
 
     /** 操作人 */
     @NotBlank(message = "操作人不能为空")

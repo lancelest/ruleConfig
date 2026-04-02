@@ -4,9 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ee8aa03-a304-486f-997d-7acdf5d2814c" name="更改" comment="feat:版本迭代v2">
+    <list default="true" id="7ee8aa03-a304-486f-997d-7acdf5d2814c" name="更改" comment="feat:版本迭代v3">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mock_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/mock_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/controller/RuleConfigController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/controller/RuleConfigController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/dto/RuleConfigDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/entity/IndicatorMetadataEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/entity/WarningRuleConfigEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/mapper/IndicatorMetadataMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/mapper/WarningRuleConfigMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/service/RuleConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/service/RuleConfigService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/service/RuleConfigServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/service/RuleConfigServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/vo/RuleCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/vo/RuleCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/risk/vo/RuleConditions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/risk/vo/RuleConditions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据库设计.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据库设计.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/需求文档.md" beforeDir="false" afterPath="$PROJECT_DIR$/需求文档.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +145,7 @@
       <workItem from="1774965573728" duration="10696000" />
       <workItem from="1775052102361" duration="118000" />
       <workItem from="1775052238421" duration="69000" />
-      <workItem from="1775052332890" duration="4581000" />
+      <workItem from="1775052332890" duration="88950000" />
     </task>
     <task id="LOCAL-00001" summary="feat:版本迭代v2">
       <option name="closed" value="true" />
@@ -142,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775055525617</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat:版本迭代v3">
+      <option name="closed" value="true" />
+      <created>1775059536098</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1775059536098</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +179,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat:版本迭代v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat:版本迭代v2" />
+    <MESSAGE value="feat:版本迭代v3" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:版本迭代v3" />
   </component>
 </project>

@@ -1,8 +1,8 @@
-package com.risk.controller;
+﻿package com.risk.controller;
 
 import com.risk.dto.ResultVO;
-import com.risk.dto.RuleConfigDTO;
-import com.risk.entity.WarningRuleConfigEntity;
+import com.risk.dto.RuleConfigParams;
+import com.risk.entity.RuleConfigEntity;
 import com.risk.service.RuleConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -35,7 +35,7 @@ public class RuleConfigController {
      * 生成 version=1，status=DRAFT 的初始版本
      */
     @PostMapping
-    public ResultVO<WarningRuleConfigEntity> create(@Validated @RequestBody RuleConfigDTO dto) {
+    public ResultVO<RuleConfigEntity> create(@Validated @RequestBody RuleConfigParams dto) {
         return ResultVO.success("新增成功", ruleConfigService.create(dto));
     }
 
@@ -47,7 +47,7 @@ public class RuleConfigController {
      * 基于当前最大版本号 +1，旧版本保留不变
      */
     @PutMapping
-    public ResultVO<WarningRuleConfigEntity> update(@Validated @RequestBody RuleConfigDTO dto) {
+    public ResultVO<RuleConfigEntity> update(@Validated @RequestBody RuleConfigParams dto) {
         return ResultVO.success("更新成功", ruleConfigService.update(dto));
     }
 
@@ -93,7 +93,7 @@ public class RuleConfigController {
      * 查询单条规则详情
      */
     @GetMapping("/{id}")
-    public ResultVO<WarningRuleConfigEntity> getById(@PathVariable Long id) {
+    public ResultVO<RuleConfigEntity> getById(@PathVariable Long id) {
         return ResultVO.success(ruleConfigService.getById(id));
     }
 
@@ -102,10 +102,10 @@ public class RuleConfigController {
      *
      * 对应原型 Page4：选择左侧组合类型树 → 右侧展示该类型下所有生效规则
      */
-    @GetMapping("/portfolio/{portfolioTypeCode}")
-    public ResultVO<List<WarningRuleConfigEntity>> listByPortfolioType(
-            @PathVariable String portfolioTypeCode) {
-        return ResultVO.success(ruleConfigService.listByPortfolioType(portfolioTypeCode));
+    @GetMapping("/portfolio/{portTypeCode}")
+    public ResultVO<List<RuleConfigEntity>> listByPortType(
+            @PathVariable String portTypeCode) {
+        return ResultVO.success(ruleConfigService.listByPortType(portTypeCode));
     }
 
     /**
@@ -113,17 +113,17 @@ public class RuleConfigController {
      *
      * 对应原型 Page5：选择左侧指标树 → 右侧展示该指标在所有组合类型下的生效规则
      */
-    @GetMapping("/indicator/{indicatorCode}")
-    public ResultVO<List<WarningRuleConfigEntity>> listByIndicator(
-            @PathVariable String indicatorCode) {
-        return ResultVO.success(ruleConfigService.listByIndicator(indicatorCode));
+    @GetMapping("/indicator/{metricCode}")
+    public ResultVO<List<RuleConfigEntity>> listByMetric(
+            @PathVariable String metricCode) {
+        return ResultVO.success(ruleConfigService.listByMetric(metricCode));
     }
 
     /**
      * 查询规则的所有历史版本（不含已删除）
      */
     @GetMapping("/versions/{ruleCode}")
-    public ResultVO<List<WarningRuleConfigEntity>> listVersions(@PathVariable String ruleCode) {
+    public ResultVO<List<RuleConfigEntity>> listVersions(@PathVariable String ruleCode) {
         return ResultVO.success(ruleConfigService.listVersions(ruleCode));
     }
 
@@ -133,7 +133,7 @@ public class RuleConfigController {
      * 用于回溯已删除规则的历史版本
      */
     @GetMapping("/versions/{ruleCode}/all")
-    public ResultVO<List<WarningRuleConfigEntity>> listVersionsIncludeDeleted(@PathVariable String ruleCode) {
+    public ResultVO<List<RuleConfigEntity>> listVersionsIncludeDeleted(@PathVariable String ruleCode) {
         return ResultVO.success(ruleConfigService.listVersionsIncludeDeleted(ruleCode));
     }
 }

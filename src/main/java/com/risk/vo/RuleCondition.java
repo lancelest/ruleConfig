@@ -1,4 +1,4 @@
-package com.risk.vo;
+﻿package com.risk.vo;
 
 import lombok.Data;
 
@@ -8,17 +8,17 @@ import java.math.BigDecimal;
 /**
  * 规则条件 - 单个条件
  *
- * 示例：超额收益率大于0 → {indicatorCode:"excess_return_1y", operator:"GT", threshold:0}
+ * 示例：超额收益率大于0 → {metricCode:"excess_return_1y", operator:"GT", threshold:0}
  */
 @Data
 public class RuleCondition implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    /** 指标编码，关联 indicator_metadata.indicator_code */
-    private String indicatorCode;
+    /** 指标编码，关联 metric_metadata.metric_code */
+    private String metricCode;
 
     /** 指标名称（冗余存储，方便展示） */
-    private String indicatorName;
+    private String metricName;
 
     /**
      * 比较运算符
